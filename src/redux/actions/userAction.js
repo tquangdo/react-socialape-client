@@ -56,6 +56,15 @@ export const getAuthenUserDetails = () => (dispatch) => {
         .catch(err => console.log(err))
 }
 
+export const addUserDetails = (userDetails) => (dispatch) => {
+    dispatch({ type: LOADING_USER })
+    AxiosService.post('/user', userDetails)
+        .then(() => {
+            dispatch(getAuthenUserDetails())
+        })
+        .catch(err => console.log(err))
+}
+
 export const uploadImage = (formData) => (dispatch) => {
     dispatch({ type: LOADING_USER })
     AxiosService.post('/user/image', formData)

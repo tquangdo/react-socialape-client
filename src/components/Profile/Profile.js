@@ -1,17 +1,19 @@
-import React, { Component, Fragment } from 'react'
-import { withStyles, Paper, Typography, Button, IconButton, Tooltip } from '@material-ui/core'
-import MuiLink from '@material-ui/core/Link';
-import { Link } from 'react-router-dom'
-import profileStyle from './ProfileStyle'
-import { connect } from 'react-redux'
-import { logoutUser, uploadImage } from '../../redux/actions/userAction'
-import dayjs from 'dayjs'
+import { Button, Paper, Typography, withStyles } from '@material-ui/core'
+import MuiLink from '@material-ui/core/Link'
+import CalendarToday from '@material-ui/icons/CalendarToday'
+import EditIcon from '@material-ui/icons/Edit'
+import KeyboardReturn from '@material-ui/icons/KeyboardReturn'
+import LinkIcon from '@material-ui/icons/Link'
 // Icons
 import LocationOn from '@material-ui/icons/LocationOn'
-import LinkIcon from '@material-ui/icons/Link'
-import CalendarToday from '@material-ui/icons/CalendarToday'
-import EditIcon from '@material-ui/icons/Edit';
-// import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+import dayjs from 'dayjs'
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logoutUser, uploadImage } from '../../redux/actions/userAction'
+import MyButton from '../../utils/MyButton'
+import EditDetails from '../EditDetails'
+import profileStyle from './ProfileStyle'
 
 class Profile extends Component {
     handleImageChange = event => {
@@ -23,6 +25,9 @@ class Profile extends Component {
     handleEditPicture = () => {
         const fileInput = document.getElementById('imageInput')
         fileInput.click()
+    }
+    handleLogout = () => {
+        this.props.logoutUser()
     }
     render() {
         const {
@@ -48,11 +53,10 @@ class Profile extends Component {
                             {/* upload image */}
                             <input type='file' id='imageInput'
                                 hidden='hidden' onChange={this.handleImageChange} />
-                            <Tooltip title='Đổi avatar' placement='top'>
-                                <IconButton onClick={this.handleEditPicture} className='button'>
-                                    <EditIcon color='primary' />
-                                </IconButton>
-                            </Tooltip>
+                            <MyButton tip='Đổi avatar'
+                                onClick={this.handleEditPicture} btnClassName='button'>
+                                <EditIcon color='primary' />
+                            </MyButton>
                         </div>
                         <div className='profile-details'>
                             <MuiLink component={Link} to={`/users/${handle}`}
@@ -80,6 +84,11 @@ class Profile extends Component {
                             <CalendarToday color='primary' />{' '}
                             <span>Gia nhập từ: {dayjs(createdAt).format('MMMM YYYY')}</span>
                         </div>
+                        <MyButton tip='Logout'
+                            onClick={this.handleLogout} btnClassName='button'>
+                            <KeyboardReturn color='primary' />
+                        </MyButton>
+                        <EditDetails />
                     </div>
                 </Paper>
             ) : (

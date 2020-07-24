@@ -1,4 +1,7 @@
 const profileStyle = () => ({
+    button: {
+        float: 'right',
+    },
     paper: {
         padding: 20
     },
