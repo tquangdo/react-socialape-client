@@ -1,5 +1,5 @@
 import AxiosService from '../../utils/AxiosService'
-import { LOADING_DATA, SET_SCREAMS, LIKE_SCREAM, UNLIKE_SCREAM } from '../types'
+import { LOADING_DATA, SET_SCREAMS, LIKE_SCREAM, UNLIKE_SCREAM, DELETE_SCREAM } from '../types'
 
 export const likeScream = (screamId) => (dispatch) => {
     AxiosService.get(`/screams/${screamId}/like`)
@@ -44,4 +44,17 @@ export const getAllScreams = () => (dispatch) => {
             })
         })
 }
+export const deleteScream = screamId => (dispatch) => {
+    AxiosService.delete(`/screams/${screamId}`)
+        .then(() => {
+            dispatch({
+                type: DELETE_SCREAM,
+                payload: screamId,
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 
