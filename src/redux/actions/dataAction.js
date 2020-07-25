@@ -1,5 +1,5 @@
 import AxiosService from '../../utils/AxiosService'
-import { LOADING_DATA, SET_SCREAMS, LIKE_SCREAM, UNLIKE_SCREAM, DELETE_SCREAM } from '../types'
+import { LOADING_DATA, SET_SCREAMS, LIKE_SCREAM, UNLIKE_SCREAM, DELETE_SCREAM, LOADING_UI, POST_SCREAM, CLEAR_ERRORS, SET_ERRORS, SET_SCREAM, STOP_LOADING_UI } from '../types'
 
 export const likeScream = (screamId) => (dispatch) => {
     AxiosService.get(`/screams/${screamId}/like`)
@@ -44,6 +44,45 @@ export const getAllScreams = () => (dispatch) => {
             })
         })
 }
+
+export const get1Scream = (screamId) => (dispatch) => {
+    dispatch({ type: LOADING_UI })
+    AxiosService.get(`/screams/${screamId}`)
+        .then(res => {
+            dispatch({
+                type: SET_SCREAM,
+                payload: res.data,
+            })
+            dispatch({ type: STOP_LOADING_UI })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const post1Scream = (newScream) => (dispatch) => {
+    dispatch({ type: LOADING_UI })
+    AxiosService.post('/scream', newScream)
+        .then(res => {
+            dispatch({
+                type: POST_SCREAM,
+                payload: res.data,
+            })
+            dispatch({ type: CLEAR_ERRORS })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data,
+            })
+        })
+}
+
+export const clearErrors = () => (dispatch) => {
+    dispatch({ type: CLEAR_ERRORS })
+}
+
 export const deleteScream = screamId => (dispatch) => {
     AxiosService.delete(`/screams/${screamId}`)
         .then(() => {

@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import MyButton from '../utils/MyButton'
+import { AppBar, Button, Toolbar } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
-import AddIcon from '@material-ui/icons/Add'
 import Notifications from '@material-ui/icons/Notifications'
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import MyButton from '../utils/MyButton'
+import PostScream from './PostScream/PostScream'
 
 class Navbar extends Component {
     render() {
@@ -15,9 +15,7 @@ class Navbar extends Component {
                 <Toolbar className='nav-container' >
                     {authenticated ? (
                         <Fragment>
-                            <MyButton tip='Hãy tạo 1 status!' >
-                                <AddIcon color='primary' />
-                            </MyButton>
+                            <PostScream />
                             <Link to='/'>
                                 <MyButton tip='Home' >
                                     <HomeIcon color='primary' />

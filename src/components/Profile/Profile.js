@@ -49,7 +49,7 @@ class Profile extends Component {
                 <Paper className={classes.paper}>
                     <div className={classes.profile}>
                         <div className='image-wrapper'>
-                            <img src={imageUrl} alt='profile' className='profile-image' />
+                            <img src={imageUrl} title='Ảnh avatar' alt='profile' className='profile-image' />
                             {/* upload image */}
                             <input type='file' id='imageInput'
                                 hidden='hidden' onChange={this.handleImageChange} />

@@ -77,5 +77,5 @@ export const uploadImage = (formData) => (dispatch) => {
 const setAuthorizeHeader = token => {
     const FBIdToken = `Bearer ${token}`
     localStorage.setItem('FBIdToken', FBIdToken)
-    AxiosService.authorize(FBIdToken) //!!!!!!!!!!!!!!!!!!!!!
+    AxiosService.authorize(FBIdToken)
 }

@@ -22,7 +22,7 @@ class DeleteScream extends Component {
         const { classes } = this.props
         return (
             <Fragment>
-                <MyButton tip='Xóa status ' onClick={this.handleOpen}
+                <MyButton tip='Xóa post' onClick={this.handleOpen}
                     btnClassName={classes.deleteButton}>
                     <DeleteOutline color='secondary' />
                 </MyButton>
@@ -30,7 +30,7 @@ class DeleteScream extends Component {
                     onClose={this.handleClose}
                     fullWidth maxWidth='sm'>
                     <DialogTitle>
-                        Bạn có chắc muốn xóa status này ko?
+                        Bạn có chắc muốn xóa post này ko?
                     </DialogTitle>
                     <DialogActions>
                         <Button onClick={this.handleClose} color='primary'>
