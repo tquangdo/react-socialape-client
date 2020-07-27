@@ -13,6 +13,15 @@ import ScreamDLG from '../ScreamDLG/ScreamDLG'
 import LikeButton from '../LikeButton'
 
 class Scream extends Component {
+    state = {
+        commentCountSta: this.props.scream.commentCount
+    }
+    updateCmtCnt = arg_screamId => {
+        let { commentCountSta } = this.state
+        if (arg_screamId === this.props.scream.screamId) {
+            this.setState({ commentCountSta: ++commentCountSta })
+        }
+    }
     render() {
         dayjs.locale('vi')
         dayjs.extend(relativeTime)
@@ -25,7 +34,6 @@ class Scream extends Component {
                 userImage,
                 createdAt,
                 likeCount,
-                commentCount,
             },
             user: { authenticated, credentials: { handle } },
         } = this.props
@@ -50,8 +58,9 @@ class Scream extends Component {
                     <MyButton tip='Bình luận'>
                         <ChatIcon color='primary' />
                     </MyButton>
-                    <span>{commentCount} Bình luận</span>
-                    <ScreamDLG screamId={screamId} userHandle={userHandle} />
+                    <span>{this.state.commentCountSta} Bình luận</span>
+                    <ScreamDLG updateCmtCnt={this.updateCmtCnt} screamId={screamId}
+                        userHandle={userHandle} likeCount={likeCount} />
                 </CardContent>
             </Card>
         )

@@ -11,6 +11,7 @@ import MyButton from '../../utils/MyButton'
 import LikeButton from '../LikeButton'
 import screamDLGStyle from './ScreamDLGStyle'
 import Comments from '../Comments/Comments'
+import CommentForm from '../CommentForm'
 
 class ScreamDLG extends Component {
     state = {
@@ -27,13 +28,13 @@ class ScreamDLG extends Component {
     render() {
         const {
             classes,
+            updateCmtCnt,
             scream: {
                 screamId,
                 body,
                 userHandle,
                 userImage,
                 createdAt,
-                likeCount,
                 commentCount,
                 comments,
             },
@@ -60,14 +61,14 @@ class ScreamDLG extends Component {
                         <hr className={classes.invisibleSeparator} />
                         <Typography variant="body1">{body}</Typography>
                         <LikeButton screamId={screamId} />
-                        <span>{likeCount} Thích</span>
+                        <span>{this.props.likeCount} Thích</span>
                         <MyButton tip="comments">
                             <ChatIcon color="primary" />
                         </MyButton>
                         <span>{commentCount} Bình luận</span>
                     </Grid>
                     <hr className={classes.visibleSeparator} />
-                    {/* <CommentForm screamId={screamId} /> */}
+                    <CommentForm updateCmtCnt={updateCmtCnt} screamId={screamId} />
                     <Comments comments={comments} />
                 </Grid>
             )

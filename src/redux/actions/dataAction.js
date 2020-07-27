@@ -1,5 +1,5 @@
 import AxiosService from '../../utils/AxiosService'
-import { LOADING_DATA, SET_SCREAMS, LIKE_SCREAM, UNLIKE_SCREAM, DELETE_SCREAM, LOADING_UI, POST_SCREAM, CLEAR_ERRORS, SET_ERRORS, SET_SCREAM, STOP_LOADING_UI } from '../types'
+import { LOADING_DATA, SET_SCREAMS, LIKE_SCREAM, UNLIKE_SCREAM, DELETE_SCREAM, LOADING_UI, POST_SCREAM, CLEAR_ERRORS, SET_ERRORS, SET_SCREAM, STOP_LOADING_UI, SUBMIT_COMMENT } from '../types'
 
 export const likeScream = (screamId) => (dispatch) => {
     AxiosService.get(`/screams/${screamId}/like`)
@@ -60,6 +60,24 @@ export const get1Scream = (screamId) => (dispatch) => {
         })
 }
 
+export const cmtOnScream = (screamId, commentData) => (dispatch) => {
+    AxiosService.post(`/screams/${screamId}/comment`, commentData)
+        .then(res => {
+            dispatch({
+                type: SUBMIT_COMMENT,
+                payload: res.data,
+            })
+            dispatch(clearErrors())
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data,
+            })
+        })
+}
+
 export const post1Scream = (newScream) => (dispatch) => {
     dispatch({ type: LOADING_UI })
     AxiosService.post('/scream', newScream)
@@ -68,7 +86,7 @@ export const post1Scream = (newScream) => (dispatch) => {
                 type: POST_SCREAM,
                 payload: res.data,
             })
-            dispatch({ type: CLEAR_ERRORS })
+            dispatch(clearErrors())
         })
         .catch(err => {
             console.log(err)

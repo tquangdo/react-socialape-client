@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
-import { Link } from 'react-router-dom'
-import MyButton from '../utils/MyButton'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { likeScream, unlikeScream } from '../redux/actions/dataAction'
+import MyButton from '../utils/MyButton'
 
 class LikeButton extends Component {
     likedScream = () => {
