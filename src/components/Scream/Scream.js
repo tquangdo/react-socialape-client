@@ -16,10 +16,9 @@ class Scream extends Component {
     state = {
         commentCountSta: this.props.scream.commentCount
     }
-    updateCmtCnt = arg_screamId => {
-        let { commentCountSta } = this.state
+    updateCmtCnt = (arg_screamId, arg_cmtCnt) => {
         if (arg_screamId === this.props.scream.screamId) {
-            this.setState({ commentCountSta: ++commentCountSta })
+            this.setState({ commentCountSta: arg_cmtCnt })
         }
     }
     render() {
@@ -59,7 +58,7 @@ class Scream extends Component {
                         <ChatIcon color='primary' />
                     </MyButton>
                     <span>{this.state.commentCountSta} Bình luận</span>
-                    <ScreamDLG updateCmtCnt={this.updateCmtCnt} screamId={screamId}
+                    <ScreamDLG updateCmtCnt={this.updateCmtCnt} screamIdFromScreamJS={screamId}
                         userHandle={userHandle} likeCount={likeCount} />
                 </CardContent>
             </Card>

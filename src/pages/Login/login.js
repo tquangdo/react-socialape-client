@@ -26,7 +26,7 @@ class login extends Component {
             email: email,
             password: pw,
         }
-        this.props.loginUser(userData, this.props.history)
+        this.props.loginUser(userData, this.props.history) //***history 3
     }
     handleChange = event => {
         const { name, value } = event.target

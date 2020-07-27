@@ -1,7 +1,7 @@
+import { Button, Grid, TextField } from '@material-ui/core'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { cmtOnScream } from '../redux/actions/dataAction'
-import { Grid, TextField, Button } from '@material-ui/core'
 
 class CommentForm extends Component {
     state = {
@@ -25,9 +25,7 @@ class CommentForm extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault()
-        const { screamId } = this.props
-        this.props.cmtOnScream(screamId, { body: this.state.body })
-        this.props.updateCmtCnt(screamId)
+        this.props.cmtOnScream(this.props.screamId, { body: this.state.body })
     }
     render() {
         const { authenticated } = this.props

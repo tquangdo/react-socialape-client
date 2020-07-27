@@ -38,6 +38,7 @@ class App extends Component {
                 exact path='/signup' component={signup} />
               <AuthRoute
                 exact path='/login' component={login} />
+              {/* ***history 2 */}
             </Switch>
           </div>
         </Router>

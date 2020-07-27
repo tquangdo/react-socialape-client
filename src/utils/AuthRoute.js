@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const AuthRoute = ({ component: Component, authenticated, ...rest }) => (
     <Route
-        {...rest}
+        {...rest} //***history 1
         render={props =>
             authenticated ? <Redirect to='/' /> : <Component {...props} />
         }

@@ -8,7 +8,7 @@ export const loginUser = (userData, history) => (dispatch) => {
             setAuthorizeHeader(res.data.token)
             dispatch(getAuthenUserDetails())
             dispatch({ type: CLEAR_ERRORS })
-            history.push('/')
+            history.push('/') //***history 4
         })
         .catch(err => {
             dispatch({

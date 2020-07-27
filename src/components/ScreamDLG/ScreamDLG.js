@@ -19,16 +19,16 @@ class ScreamDLG extends Component {
     }
     handleOpen = () => {
         this.setState({ open: true })
-        this.props.get1Scream(this.props.screamId)
+        this.props.get1Scream(this.props.screamIdFromScreamJS)
     }
     handleClose = () => {
         this.props.clearErrors()
         this.setState({ open: false, })
+        this.props.updateCmtCnt(this.props.screamIdFromScreamJS, this.props.scream.commentCount)
     }
     render() {
         const {
             classes,
-            updateCmtCnt,
             scream: {
                 screamId,
                 body,
@@ -68,7 +68,7 @@ class ScreamDLG extends Component {
                         <span>{commentCount} Bình luận</span>
                     </Grid>
                     <hr className={classes.visibleSeparator} />
-                    <CommentForm updateCmtCnt={updateCmtCnt} screamId={screamId} />
+                    <CommentForm screamId={screamId} />
                     <Comments comments={comments} />
                 </Grid>
             )
