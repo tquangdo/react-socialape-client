@@ -1,5 +1,5 @@
 import AxiosService from '../../utils/AxiosService'
-import { LOADING_UI, SET_USER, CLEAR_ERRORS, SET_ERRORS, SET_UNAUTHENTICATED, LOADING_USER } from '../types'
+import { LOADING_UI, SET_USER, CLEAR_ERRORS, SET_ERRORS, SET_UNAUTHENTICATED, LOADING_USER, MARK_NOTIFICATIONS_READ } from '../types'
 
 export const loginUser = (userData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI })
@@ -61,6 +61,14 @@ export const addUserDetails = (userDetails) => (dispatch) => {
     AxiosService.post('/user', userDetails)
         .then(() => {
             dispatch(getAuthenUserDetails())
+        })
+        .catch(err => console.log(err))
+}
+
+export const markNotifiRead = notifiId => (dispatch) => {
+    AxiosService.post('/notifications', notifiId)
+        .then(() => {
+            dispatch({ type: MARK_NOTIFICATIONS_READ })
         })
         .catch(err => console.log(err))
 }

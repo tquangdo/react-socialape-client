@@ -1,19 +1,15 @@
 import { Button, Paper, Typography, withStyles } from '@material-ui/core'
-import MuiLink from '@material-ui/core/Link'
-import CalendarToday from '@material-ui/icons/CalendarToday'
 import EditIcon from '@material-ui/icons/Edit'
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn'
-import LinkIcon from '@material-ui/icons/Link'
-// Icons
-import LocationOn from '@material-ui/icons/LocationOn'
-import dayjs from 'dayjs'
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logoutUser, uploadImage } from '../../redux/actions/userAction'
 import MyButton from '../../utils/MyButton'
 import EditDetails from '../EditDetails'
+import StaticProfile from '../StaticProfile/StaticProfile'
 import profileStyle from './ProfileStyle'
+import ProfileSkeleton from '../../utils/ProfileSkeleton/ProfileSkeleton'
 
 class Profile extends Component {
     handleImageChange = event => {
@@ -33,64 +29,25 @@ class Profile extends Component {
         const {
             classes,
             user: {
-                credentials: {
-                    handle,
-                    createdAt,
-                    imageUrl,
-                    bio,
-                    website,
-                    location,
-                },
-                loading, authenticated,
+                credentials, loading, authenticated,
             }
         } = this.props
         let profileMarkup = (!loading) ? (
             authenticated ? (
-                <Paper className={classes.paper}>
-                    <div className={classes.profile}>
-                        <div className='image-wrapper'>
-                            <img src={imageUrl} title='Ảnh avatar' alt='profile' className='profile-image' />
-                            {/* upload image */}
-                            <input type='file' id='imageInput'
-                                hidden='hidden' onChange={this.handleImageChange} />
-                            <MyButton tip='Đổi avatar'
-                                onClick={this.handleEditPicture} btnClassName='button'>
-                                <EditIcon color='primary' />
-                            </MyButton>
-                        </div>
-                        <div className='profile-details'>
-                            <MuiLink component={Link} to={`/users/${handle}`}
-                                color='primary' variant='h5'>
-                                @{handle}
-                            </MuiLink>
-                            <hr />
-                            {bio && <Typography variant='body2'>
-                                {bio}
-                            </Typography>}
-                            <hr />
-                            {location && (
-                                <Fragment>
-                                    <LocationOn color='primary' /><span>{location}</span>
-                                    <hr />
-                                </Fragment>)}
-                            {website && (
-                                <Fragment>
-                                    <LinkIcon color='primary' />
-                                    <a href={website} target='_blank' rel='noopener noreferrer' >
-                                        {' '}{website}
-                                    </a>
-                                    <hr />
-                                </Fragment>)}
-                            <CalendarToday color='primary' />{' '}
-                            <span>Gia nhập từ: {dayjs(createdAt).format('MMMM YYYY')}</span>
-                        </div>
-                        <MyButton tip='Logout'
-                            onClick={this.handleLogout} btnClassName='button'>
-                            <KeyboardReturn color='primary' />
-                        </MyButton>
-                        <EditDetails />
-                    </div>
-                </Paper>
+                <Fragment>
+                    < input type='file' id='imageInput'
+                        hidden='hidden' onChange={this.handleImageChange} />
+                    <MyButton tip='Đổi avatar'
+                        onClick={this.handleEditPicture} btnClassName={classes.button}>
+                        <EditIcon color='primary' />
+                    </MyButton>
+                    <StaticProfile profile={credentials} />
+                    <MyButton tip='Logout'
+                        onClick={this.handleLogout} btnClassName='button'>
+                        <KeyboardReturn color='primary' />
+                    </MyButton>
+                    <EditDetails />
+                </Fragment>
             ) : (
                     <Paper className={classes.paper}>
                         <Typography variant="body2" align="center">
@@ -115,7 +72,7 @@ class Profile extends Component {
                             </Button>
                         </div>
                     </Paper>
-                )) : (<p>Đang load dữ liệu...</p>)
+                )) : (<ProfileSkeleton />)
         return profileMarkup
     }
 }

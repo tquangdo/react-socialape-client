@@ -26,6 +26,7 @@ class Scream extends Component {
         dayjs.extend(relativeTime)
         const {
             classes,
+            openDialog,
             scream: {
                 screamId,
                 body,
@@ -59,7 +60,7 @@ class Scream extends Component {
                     </MyButton>
                     <span>{this.state.commentCountSta} Bình luận</span>
                     <ScreamDLG updateCmtCnt={this.updateCmtCnt} screamIdFromScreamJS={screamId}
-                        userHandle={userHandle} likeCount={likeCount} />
+                        userHandle={userHandle} likeCount={likeCount} openDialog={openDialog} />
                 </CardContent>
             </Card>
         )

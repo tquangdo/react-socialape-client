@@ -1,11 +1,11 @@
 import { AppBar, Button, Toolbar } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
-import Notifications from '@material-ui/icons/Notifications'
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import MyButton from '../utils/MyButton'
 import PostScream from './PostScream/PostScream'
+import Notification from './Notification'
 
 class Navbar extends Component {
     render() {
@@ -21,9 +21,7 @@ class Navbar extends Component {
                                     <HomeIcon color='primary' />
                                 </MyButton>
                             </Link>
-                            <MyButton tip='Notifications' >
-                                <Notifications color='primary' />
-                            </MyButton>
+                            <Notification />
                         </Fragment>
                     ) : (
                             <Fragment>

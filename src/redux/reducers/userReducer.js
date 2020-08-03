@@ -1,4 +1,4 @@
-import { SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_USER, LOADING_USER, LIKE_SCREAM, UNLIKE_SCREAM } from '../types'
+import { SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_USER, LOADING_USER, LIKE_SCREAM, UNLIKE_SCREAM, MARK_NOTIFICATIONS_READ } from '../types'
 
 const initialState = {
     authenticated: false,
@@ -27,6 +27,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
+            }
+        case MARK_NOTIFICATIONS_READ:
+            state.notifications.forEach(notifi => notifi.read = true)
+            return {
+                ...state,
             }
         case LIKE_SCREAM:
             return {

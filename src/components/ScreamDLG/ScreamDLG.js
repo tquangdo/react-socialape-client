@@ -16,12 +16,27 @@ import CommentForm from '../CommentForm'
 class ScreamDLG extends Component {
     state = {
         open: false,
+        oldPath: '',
+        newPath: '',
+    }
+    componentDidMount = () => {
+        if (this.props.openDialog) {
+            this.handleOpen()
+        }
     }
     handleOpen = () => {
-        this.setState({ open: true })
-        this.props.get1Scream(this.props.screamIdFromScreamJS)
+        let oldPath = window.location.pathname
+        const { screamIdFromScreamJS, userHandle } = this.props
+        const newPath = `/users/${userHandle}/screams/${screamIdFromScreamJS}`
+        if (oldPath === newPath) {
+            oldPath = `/users/${userHandle}`
+        }
+        window.history.pushState(null, null, newPath)
+        this.setState({ open: true, oldPath, newPath })
+        this.props.get1Scream(screamIdFromScreamJS)
     }
     handleClose = () => {
+        window.history.pushState(null, null, this.state.oldPath)
         this.props.clearErrors()
         this.setState({ open: false, })
         this.props.updateCmtCnt(this.props.screamIdFromScreamJS, this.props.scream.commentCount)

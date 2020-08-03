@@ -45,6 +45,24 @@ export const getAllScreams = () => (dispatch) => {
         })
 }
 
+export const getUserDetails = userHandle => (dispatch) => {
+    dispatch({ type: LOADING_DATA })
+    AxiosService
+        .get(`/users/${userHandle}`)
+        .then(res => {
+            dispatch({
+                type: SET_SCREAMS,
+                payload: res.data.screams
+            })
+        })
+        .catch(() => {
+            dispatch({
+                type: SET_SCREAMS,
+                payload: null
+            })
+        })
+}
+
 export const get1Scream = (screamId) => (dispatch) => {
     dispatch({ type: LOADING_UI })
     AxiosService.get(`/screams/${screamId}`)
