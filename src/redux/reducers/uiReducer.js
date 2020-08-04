@@ -1,4 +1,5 @@
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, STOP_LOADING_UI } from '../types'
+import { hienMsgError } from '../../utils/ToastHelper'
 
 const initialState = {
     loading: false,
@@ -8,6 +9,7 @@ const initialState = {
 const uiReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ERRORS:
+            hienMsgError(action.payload)
             return {
                 ...state,
                 loading: false,

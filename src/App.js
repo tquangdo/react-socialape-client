@@ -12,6 +12,8 @@ import { Provider } from 'react-redux'
 import { getAuthenUserDetails, logoutUser } from './redux/actions/userAction'
 import { SET_AUTHENTICATED } from './redux/types'
 import AxiosService from './utils/AxiosService'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css' //set with ToastContainer
 import user from './pages/user'
 
 const token = localStorage.FBIdToken
@@ -19,7 +21,7 @@ if (token) {
   const decodedToken = jwtDecode(token)
   if (decodedToken.exp * 1000 < Date.now()) {
     store.dispatch(logoutUser())
-    window.location.href = '/login'
+    window.location.href = '/login' //access URL mới tức thì, các xử lí background bị stop ngay, KO thực hiện 
   } else {
     store.dispatch({ type: SET_AUTHENTICATED })
     AxiosService.authorize(token)
@@ -33,6 +35,7 @@ class App extends Component {
         <Router>
           <Navbar />
           <div className="container">
+            <ToastContainer />
             <Switch>
               <Route exact path='/' component={home} />
               <AuthRoute

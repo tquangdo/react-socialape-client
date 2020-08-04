@@ -31,7 +31,7 @@ class ScreamDLG extends Component {
         if (oldPath === newPath) {
             oldPath = `/users/${userHandle}`
         }
-        window.history.pushState(null, null, newPath)
+        window.history.pushState(null, null, newPath) //chỉ đổi URL chứ ko access to URL mới đó
         this.setState({ open: true, oldPath, newPath })
         this.props.get1Scream(screamIdFromScreamJS)
     }

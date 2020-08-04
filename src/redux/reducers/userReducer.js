@@ -1,4 +1,5 @@
 import { SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_USER, LOADING_USER, LIKE_SCREAM, UNLIKE_SCREAM, MARK_NOTIFICATIONS_READ } from '../types'
+import { hienMsg } from '../../utils/ToastHelper'
 
 const initialState = {
     authenticated: false,
@@ -34,6 +35,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
             }
         case LIKE_SCREAM:
+            hienMsg('Đã like!')
             return {
                 ...state,
                 likes: [
@@ -45,6 +47,7 @@ const userReducer = (state = initialState, action) => {
                 ]
             }
         case UNLIKE_SCREAM:
+            hienMsg('Đã unlike!')
             return {
                 ...state,
                 likes: state.likes.filter(

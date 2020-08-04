@@ -1,4 +1,5 @@
 import { SET_SCREAMS, LOADING_DATA, LIKE_SCREAM, UNLIKE_SCREAM, DELETE_SCREAM, POST_SCREAM, SET_SCREAM, SUBMIT_COMMENT } from '../types'
+import { hienMsg } from '../../utils/ToastHelper'
 
 const initialState = {
     screams: [],
@@ -26,6 +27,10 @@ const dataReducer = (state = initialState, action) => {
                 scream: action.payload,
             }
         case POST_SCREAM:
+            if (window.location.pathname !== '/') {
+                window.location = '/'
+            }
+            hienMsg('Đã tạo post thành công!')
             return {
                 ...state,
                 screams: [
@@ -76,6 +81,7 @@ const dataReducer = (state = initialState, action) => {
                 scream => scream.screamId === action.payload
             )
             state.screams.splice(index, 1)
+            hienMsg('Đã xóa post thành công!')
             return { ...state }
         default:
             return state
