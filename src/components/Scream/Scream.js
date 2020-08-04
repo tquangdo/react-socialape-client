@@ -14,12 +14,22 @@ import LikeButton from '../LikeButton'
 
 class Scream extends Component {
     state = {
-        commentCountSta: this.props.scream.commentCount
+        commentCountSta: 0
     }
     updateCmtCnt = (arg_screamId, arg_cmtCnt) => {
         if (arg_screamId === this.props.scream.screamId) {
             this.setState({ commentCountSta: arg_cmtCnt })
         }
+    }
+    UNSAFE_componentWillReceiveProps = nextProps => {
+        this.setState({
+            commentCountSta: nextProps.scream.commentCount
+        })
+    }
+    componentDidMount = () => {
+        this.setState({
+            commentCountSta: this.props.scream.commentCount
+        })
     }
     render() {
         dayjs.locale('vi')
